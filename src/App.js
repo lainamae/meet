@@ -1,12 +1,13 @@
 // src/App.js
 
 import React, { Component } from 'react';
-import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
+import {Container, Row} from 'react-bootstrap'
+import './App.scss';
 
 class App extends Component {
   state = {
@@ -38,9 +39,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Container>
+          <Row>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents />
+        </Row>
+        <Row>
         <EventList events={this.state.events}/>
+        </Row>
+        </Container>
       </div>
     );
   }
