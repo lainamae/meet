@@ -1,7 +1,7 @@
 // src/Event.js
 
 import React, { Component } from "react";
-import { Button } from 'react-bootstrap';
+import { Button} from 'react-bootstrap';
 
 class Event extends Component {
   state = {
