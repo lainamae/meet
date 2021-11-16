@@ -32,22 +32,23 @@ defineFeature(feature, test => {
 
   test('User can change the number of events they want to see', ({ given, when, then }) => {
     let AppWrapper;
-    let NumberOfEventsWrapper;
 
       given('a user is on the main page', () => {
         AppWrapper = mount(<App />);
-        NumberOfEventsWrapper = mount(<NumberOfEvents updateEventCount={() => {}} />);
-
+        const EventsQuantity = { target: { value: 8 } }
+        AppWrapper.find('.number-events-input').simulate('change', 
+        EventsQuantity);
       });
 
       when('a user specifies the number of events', () => {
-        NumberOfEventsWrapper.find('input').simulate('change', 
-        { target: { name: 'number' , value: 8 } });   
+        expect(AppWrapper.find('.EventList')).toHaveLength(1);
+        
         AppWrapper.update();
 
       });
 
       then('the specified number of events is displayed', () => {
+        // AppWrapper.update();
         expect(AppWrapper.find('.event')).toHaveLength(8);
       });
   });
