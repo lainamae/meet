@@ -14,7 +14,7 @@ class App extends Component {
     events: [],
     locations: [],
     currentLocation: "all",
-    numberOfEvents: 32
+    numberOfEvents: 12
   }
   async componentDidMount() {
     this.mounted = true;
