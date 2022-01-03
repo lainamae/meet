@@ -19,22 +19,22 @@ class Event extends Component {
     const { collapsed } = this.state;
     return  <div className="event">
               <h2 className="summary">{event.summary}</h2>
-              <p className="start-date">
-              {event.start.dateTime} ({event.start.timeZone})
-              </p>
               <p className="location">
                 {event.location}
               </p>
-              <Button variant="primary" className="show-more" onClick={this.handleClick}>
-                    Toggle details
-              </Button>
-                <div className={`more-info ${collapsed ? `hidden` : `show`}`}>
-                  <h3>About the event:</h3>
+              <p className="start-date">
+              {event.start.dateTime} <i>{event.start.timeZone}</i>
+              </p>
+              <div className={`more-info ${collapsed ? `hidden` : `show`}`}>
+                  <p className="event-description">{event.description}</p>
                   <a href={event.htmlLink} rel="noreferrer" target="_blank">
                     See details on Google Calendar
                   </a>
-                  <p className="event-description">{event.description}</p>
                 </div>
+              <Button variant="primary" className="show-more" onClick={this.handleClick}>
+                    Toggle details
+              </Button>
+                
             </div>
   }
 }

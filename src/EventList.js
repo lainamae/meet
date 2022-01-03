@@ -2,19 +2,16 @@
 
 import React, { Component } from 'react';
 import Event from './Event';
-import {Col} from 'react-bootstrap'
 
 class EventList extends Component {
   render() {
     const { events } = this.props;
     return (
-      <ul className="EventList d-flex flex-row flex-wrap">
+      <ul className="EventList">
  {events.map(event =>
-        <Col md={4} key={event.id} className="event-col">
-        <li>
+        <li key={event.id} className="event-col">
           <Event event={event} />
         </li>
-        </Col>
       )}
       </ul>
     );

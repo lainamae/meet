@@ -4,10 +4,13 @@ import React, { Component } from 'react';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
 import {Container, Row} from 'react-bootstrap'
 import './App.scss';
+import logo from './img/logo192.png';
+
 
 class App extends Component {
   state = {
@@ -52,15 +55,20 @@ class App extends Component {
     const { numberOfEvents } = this.state;
     return (
       <div className="App">
-        <Container>
+        <Container fluid>
+          <div className="nav-bar">
+              <a href= "/"><img
+              src={logo}
+              alt="MeetApp logo"
+              /></a>
+              <div className="search">
+              <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+              <NumberOfEvents numberOfEvents={numberOfEvents} updateEventCount={this.updateEventCount}/>
+              </div>
+          </div>
           <Row>
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents numberOfEvents={numberOfEvents}
-              updateEventCount={this.updateEventCount}/>
-        </Row>
-        <Row>
-        <EventList events={this.state.events}/>
-        </Row>
+            <EventList events={this.state.events}/>
+          </Row>
         </Container>
       </div>
     );
