@@ -2,11 +2,8 @@
 
 /* make the customizations */
 $theme-colors: (
-    "primary": #014542,
+    "primary": rgb(115, 48, 130),
 );
-.container-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
