@@ -12,12 +12,14 @@ import './App.scss';
 import logo from './img/logo192.png';
 
 
+
 class App extends Component {
   state = {
     events: [],
     locations: [],
     currentLocation: "all",
-    numberOfEvents: 12
+    numberOfEvents: 12,
+    errorText: ''
   }
   async componentDidMount() {
     this.mounted = true;
@@ -42,10 +44,19 @@ class App extends Component {
   }
   updateEventCount = async (e) => {
     const newVal = e.target.value;
-    this.setState({
-      numberOfEvents: newVal,
-    });
-    this.updateEvents(this.state.currentLocation, this.state.numberOfEvents);
+    if (newVal > 11) {
+      this.setState({
+        numberOfEvents: 11,
+        errorText: 'select a number from 1 to 11'
+      });
+    } else {
+      this.setState({
+        numberOfEvents: newVal,
+        errorText: ''
+      });
+    }
+    
+    this.updateEvents(this.state.currentLocation, this.state.numberOfEvents, this.state.errorText);
   };
   componentWillUnmount(){
     this.mounted = false;
@@ -63,7 +74,7 @@ class App extends Component {
               /></a>
               <div className="search">
               <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-              <NumberOfEvents numberOfEvents={numberOfEvents} updateEventCount={this.updateEventCount}/>
+              <NumberOfEvents numberOfEvents={numberOfEvents} updateEventCount={this.updateEventCount} errorText={this.state.errorText}/>
               </div>
           </div>
           <Row>
