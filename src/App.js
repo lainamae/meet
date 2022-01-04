@@ -44,10 +44,10 @@ class App extends Component {
   }
   updateEventCount = async (e) => {
     const newVal = e.target.value;
-    if (newVal > 11) {
+    if (newVal > 24) {
       this.setState({
-        numberOfEvents: 11,
-        errorText: 'select a number from 1 to 11'
+        numberOfEvents: 24,
+        errorText: 'select a number from 1 to 24'
       });
     } else {
       this.setState({
