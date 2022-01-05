@@ -5,8 +5,10 @@ $theme-colors: (
     "primary": #014542,
 );
 .container-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 1rem 5rem;
+}
+.row {
+    justify-content: center !important;
 }
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
