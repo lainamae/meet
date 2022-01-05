@@ -13,6 +13,11 @@
     width: 150px;
     margin: 0 auto;
   }
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #014542;
+  }
   } 
 .google-btn {
   img {
@@ -24,4 +29,24 @@
     padding: 0 .5rem
   }
   margin: 1rem;
+}
+
+.welcome-container {
+	background-color: #000c;
+	width: 55%;
+	padding: 1.5rem;
+	border-radius: 15px;
+	height: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 600px;
+	min-width: 300px;
+}
+
+.welcome-text {
+	padding-top: 2rem;
+  h1 {
+    font-family: 'Roboto Mono', monospace;
+  }
 }

@@ -15,7 +15,9 @@ body {
   // background: linear-gradient(180deg, rgba(254,246,255,1) 0%, rgba(245,233,238,1) 67%, rgba(237,216,225,1) 100%);
   color: rgb(235, 231, 231);
 }
-
+.Container {
+  padding: 2rem;
+}
 .App * {
   box-sizing: border-box;
 }
@@ -152,8 +154,7 @@ input[type="number"] {
 .show-more {
   margin-top: 1rem;
 }
-.more-info { 
-}
+
 .start-date {
   font-size: 11px;
 }

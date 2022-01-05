@@ -91,8 +91,9 @@ className="App" />
           <Row>
             <EventList events={this.state.events}/>
           </Row>
-          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }}/>
+          
         </Container>
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }}/>
       </div>
     );
   }
