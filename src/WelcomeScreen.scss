@@ -3,11 +3,12 @@
   width: 100%; 
   height: 100%; 
   top: 0; 
-  background: black; 
+  background: linear-gradient(128.61deg, #011F13 -4.2%, #180226 69.64%, #25011B 100.05%);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   .logo {
     width: 150px;
