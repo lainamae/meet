@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import WelcomeScreen from './WelcomeScreen';
-
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import {Container, Row} from 'react-bootstrap'
@@ -21,8 +21,18 @@ class App extends Component {
     currentLocation: "all",
     numberOfEvents: 12,
     errorText: '',
-    showWelcomeScreen: undefined
+    // showWelcomeScreen: undefined
   }
+
+  // async componentDidMount() {
+  //   this.mounted = true;
+
+  //   getEvents().then((events) => {
+  //     if (this.mounted) {
+  //       this.setState({ events, locations: extractLocations(events) });
+  //     }
+  //   });
+  // }
   async componentDidMount() { 
     this.mounted = true; 
     const accessToken = localStorage.getItem('access_token'); 
@@ -39,7 +49,7 @@ class App extends Component {
     }); 
     } 
     }
-
+  
   updateEvents = async (location) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
@@ -70,11 +80,19 @@ class App extends Component {
   componentWillUnmount(){
     this.mounted = false;
   }
-
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location)=>{
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number};
+    })
+    return data;
+  };
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div 
-className="App" /> 
+    // if (this.state.showWelcomeScreen === undefined) return <div className="App" /> 
     const { numberOfEvents } = this.state;
+    
     return (
       <div className="App">
         <Container fluid>
@@ -88,6 +106,25 @@ className="App" />
               <NumberOfEvents numberOfEvents={numberOfEvents} updateEventCount={this.updateEventCount} errorText={this.state.errorText}/>
               </div>
           </div>
+          <Row>
+          <h4>Events in each city</h4>
+          <ResponsiveContainer height={400} >
+          <ScatterChart
+           margin={{
+             top: 20, right: 20, bottom: 20, left: 20,
+           }}
+          >
+           <CartesianGrid />
+           <XAxis type="category" dataKey="city" name="city"/>
+           <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false}/>
+           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+           <Scatter data={this.getData()} fill="#ffffff" />
+          </ScatterChart>
+          </ResponsiveContainer>
+          </Row>
+
+
+
           <Row>
             <EventList events={this.state.events}/>
           </Row>

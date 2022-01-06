@@ -5,7 +5,7 @@ $theme-colors: (
     "primary": #014542,
 );
 .container-fluid {
-    padding: 1rem 5rem;
+    padding: 1rem 5rem !important;
 }
 .row {
     justify-content: center !important;
