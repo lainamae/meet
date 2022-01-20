@@ -209,9 +209,20 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  top: -2px;
 }
 
+
+.recharts-pie-sector path {
+  stroke: none;
+}
+.recharts-cartesian-grid line {
+  stroke: #828282;
+}
+.recharts-tooltip-label {
+  color: black;
+  font-weight: bold;
+}
 .data-vis-wrapper {
   display: flex;
   align-items: center;
@@ -220,19 +231,24 @@ input[type="number"] {
 .data-vis-wrapper .recharts-responsive-container {
   min-width: 100%;
   display: flex;
+  margin: 0 auto;
 }
 .recharts-surface {
   overflow: visible;
 }
 
-@media only screen and (min-width: 992px) {
-  .data-vis-wrapper {
-    flex-direction: row;
-  }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
-  }
+.recharts-legend-wrapper {
+  top: 0px;
 }
+
+// @media only screen and (min-width: 992px) {
+//   .data-vis-wrapper {
+//     flex-direction: column;
+//   }
+//   .data-vis-wrapper .recharts-responsive-container {
+//     flex-basis: 50%;
+//     max-width: 50%;
+//     min-width: auto;
+//     margin: 0 auto;
+//   }
+// }
