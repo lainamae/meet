@@ -9,7 +9,7 @@ class Nav extends Component {
 
   render() {
     return <Navbar>
-    <Navbar.Brand href="/meet">
+    <Navbar.Brand href="/#/meet">
       <img
         src={logo}
         width="48"

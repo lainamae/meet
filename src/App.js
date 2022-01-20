@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import EventGenre from './EventGenre';
 import WelcomeScreen from './WelcomeScreen';
-
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import {Container, Row} from 'react-bootstrap'
@@ -21,8 +22,8 @@ class App extends Component {
     currentLocation: "all",
     numberOfEvents: 12,
     errorText: '',
-    showWelcomeScreen: undefined
   }
+
   async componentDidMount() { 
     this.mounted = true; 
     const accessToken = localStorage.getItem('access_token'); 
@@ -39,7 +40,7 @@ class App extends Component {
     }); 
     } 
     }
-
+  
   updateEvents = async (location) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
@@ -56,7 +57,7 @@ class App extends Component {
     if (newVal > 24) {
       this.setState({
         numberOfEvents: 24,
-        errorText: 'select a number from 1 to 24'
+        errorText: 'Please select a number from 1 to 24'
       });
     } else {
       this.setState({
@@ -70,11 +71,19 @@ class App extends Component {
   componentWillUnmount(){
     this.mounted = false;
   }
-
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location)=>{
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number};
+    })
+    return data;
+  };
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div 
-className="App" /> 
-    const { numberOfEvents } = this.state;
+    // if (this.state.showWelcomeScreen === undefined) return <div className="App" /> 
+    const { locations, numberOfEvents, events } = this.state;
+    
     return (
       <div className="App">
         <Container fluid>
@@ -88,6 +97,24 @@ className="App" />
               <NumberOfEvents numberOfEvents={numberOfEvents} updateEventCount={this.updateEventCount} errorText={this.state.errorText}/>
               </div>
           </div>
+          <Row>
+            <div className='data-vis-wrapper'>
+              <EventGenre events={events}/>
+              <ResponsiveContainer height={400} >
+              <ScatterChart
+               margin={{
+                 top: 20, right: 20, bottom: 20, left: -30,
+               }}
+              >
+               <CartesianGrid />
+               <XAxis type="category" dataKey="city" name="city"/>
+               <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false}/>
+               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+               <Scatter data={this.getData()} fill="#d621d7" />
+              </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+          </Row>
           <Row>
             <EventList events={this.state.events}/>
           </Row>
